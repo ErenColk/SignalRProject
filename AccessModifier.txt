@@ -1,0 +1,4 @@
+Public : Solutionun her yerinden eriþilebilir
+Private : Solution içerisinden deðil sadece bulundugu sýnýf veya interface içinde eriþilebilir.
+Protected : Ýlgili sýnýftan ve o sýnýftan miras alan alanlardan eriþim saðlanýr.
+Internal : Sadece bulunduðu katmandan eriþim saðlanýr.

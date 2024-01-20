@@ -1,0 +1,12 @@
+*Entity katmaný 
+-Entitylerin oldugu katman. Ýliþkililerin kurulduðu tablolarýn yazýldýðý katman
+
+*DataAccessLayer KAtmaný
+-CRUD iþlemlerinin yapýldýgý katman
+-Context sýnýfýnýn bulundugu katman
+-Veri Tabanýyla iliþkiyi kurdugumuz katman.
+
+
+*BussinessLayer KAtmaný
+- Yetki katmaný olarak geçer. iþ katmanýdýr.
+- Gelen Verileri kontrol ettikten sonra crud iþlemlerine geçiþ yapýlýr.
