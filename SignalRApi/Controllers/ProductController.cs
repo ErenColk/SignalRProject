@@ -33,11 +33,12 @@ namespace SignalRApi.Controllers
 
 
         [HttpGet("ProductListWithCategory")]
-        public IActionResult ProductListWithCategory () 
+        public IActionResult ProductListWithCategory()
         {
-            var context = new SignalRContext(); 
+            var context = new SignalRContext();
             var values = context.Products.Include(x => x.Category).Select(y => new ResultProductWithCategory
             {
+                ProductName = y.ProductName,
                 Description = y.Description,
                 ImageUrl = y.ImageUrl,
                 Price = y.Price,
@@ -45,10 +46,10 @@ namespace SignalRApi.Controllers
                 CategoryName = y.Category.CategoryName,
                 ProductStatus = y.ProductStatus,
             }).ToList();
-     
+
             return Ok(values);
 
-        
+
         }
 
         [HttpPost]
@@ -60,7 +61,8 @@ namespace SignalRApi.Controllers
                 ImageUrl = createProductDto.ImageUrl,
                 Price = createProductDto.Price,
                 ProductName = createProductDto.ProductName,
-                ProductStatus = createProductDto.ProductStatus
+                ProductStatus = createProductDto.ProductStatus,
+                CategoryID = createProductDto.CategoryID
 
 
             });
@@ -68,7 +70,7 @@ namespace SignalRApi.Controllers
             return Ok("Ürün  Eklendi");
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteProduct(int id)
         {
             var value = _productService.TGetByID(id);
@@ -77,7 +79,6 @@ namespace SignalRApi.Controllers
         }
 
         [HttpGet("GetProduct")]
-
         public IActionResult GetProduct(int id)
         {
             var value = _productService.TGetByID(id);
@@ -95,7 +96,8 @@ namespace SignalRApi.Controllers
                 ImageUrl = updateProductDto.ImageUrl,
                 Price = updateProductDto.Price,
                 ProductName = updateProductDto.ProductName,
-                ProductStatus = updateProductDto.ProductStatus
+                ProductStatus = updateProductDto.ProductStatus,
+                CategoryID = updateProductDto.CategoryID
 
 
             });
