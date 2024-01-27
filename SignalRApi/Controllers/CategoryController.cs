@@ -60,7 +60,6 @@ namespace SignalRApi.Controllers
         }
 
         [HttpPut]
-
         public  IActionResult UpdateCategory(UpdateCategoryDto updateCategoryDto)
         {
             _categoryService.TUpdate(new Category()
