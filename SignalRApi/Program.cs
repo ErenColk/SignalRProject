@@ -3,6 +3,8 @@ using SignalR.BusinessLayer.Concrete;
 using SignalR.DataAccessLayer.Abstract;
 using SignalR.DataAccessLayer.Concrete;
 using SignalR.DataAccessLayer.EntityFramework;
+using SignalR.EntityLayer.Entities;
+using SignalRApi.Hubs;
 using System.Reflection;
 
 namespace SignalRApi
@@ -12,6 +14,21 @@ namespace SignalRApi
 		public static void Main(string[] args)
 		{
 			var builder = WebApplication.CreateBuilder(args);
+
+
+			builder.Services.AddCors(opt =>
+			{
+				opt.AddPolicy("CorsPolicy", builder =>
+				{
+					builder.AllowAnyHeader()
+					.AllowAnyMethod() // Gelen herhangi bir metoda izin ver
+					.SetIsOriginAllowed((host) => true) // Gelen herhangi bir kaynaða izin ver
+					.AllowCredentials(); //Herhangi bir kimliðe izin ver
+				});
+			});
+			builder.Services.AddSignalR();
+
+
 
 			builder.Services.AddDbContext<SignalRContext>();
 			//AUTO MAPPER
@@ -44,7 +61,11 @@ namespace SignalRApi
             builder.Services.AddScoped<ITestimonialService, TestimonialManager>();
             builder.Services.AddScoped<ITestimonialDal, EfTestimonialDal>();
 
+            builder.Services.AddScoped<IOrderDetailService, OrderDetailManager>();
+            builder.Services.AddScoped<IOrderDetailDal, EfOrderDetailDal>();
 
+            builder.Services.AddScoped<IOrderService, OrderManager>();
+            builder.Services.AddScoped<IOrderDal, EfOrderDal>();
 
             builder.Services.AddControllers();
 			// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -60,13 +81,15 @@ namespace SignalRApi
 				app.UseSwaggerUI();
 			}
 
+			app.UseCors("CorsPolicy");
+
 			app.UseHttpsRedirection();
 
 			app.UseAuthorization();
 
 
 			app.MapControllers();
-
+			app.MapHub<SignalRHub>("/signalrhub"); //localhost://1234//signalrhub endpointi oluþturuldu.
 			app.Run();
 		}
 	}

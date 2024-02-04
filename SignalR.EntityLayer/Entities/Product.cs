@@ -2,6 +2,10 @@
 {
 	public class Product
 	{
+        public Product()
+        {
+            OrderDetails = new List<OrderDetail>();
+        }
         public int ProductID { get; set; }
 		public string ProductName { get; set; }
         public string Description { get; set; }
@@ -12,5 +16,6 @@
         //NAVİ
         public int CategoryID { get; set; }
         public Category Category { get; set; }
+        public List<OrderDetail> OrderDetails { get; set; }
     }
 }
