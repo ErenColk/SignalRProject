@@ -12,12 +12,12 @@
 <body>
 
 
-        @await Component.InvokeAsync("_UILayoutNavbarComponentPartial")
+    @await Component.InvokeAsync("_UILayoutNavbarComponentPartial")
 
-        @RenderBody()
+    @RenderBody()
 
-        <!-- book section -->
-        @await Component.InvokeAsync("_UILayoutFooterComponentPartial")
+    <!-- book section -->
+    @await Component.InvokeAsync("_UILayoutFooterComponentPartial")
     @await Component.InvokeAsync("_UILayoutScriptComponentPartial")
     <!-- end book section -->
     <!-- footer section -->
