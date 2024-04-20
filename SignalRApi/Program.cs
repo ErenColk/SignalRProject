@@ -6,39 +6,40 @@ using SignalR.DataAccessLayer.EntityFramework;
 using SignalR.EntityLayer.Entities;
 using SignalRApi.Hubs;
 using System.Reflection;
+using System.Text.Json.Serialization;
 
 namespace SignalRApi
 {
-	public class Program
-	{
-		public static void Main(string[] args)
-		{
-			var builder = WebApplication.CreateBuilder(args);
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            var builder = WebApplication.CreateBuilder(args);
 
 
-			builder.Services.AddCors(opt =>
-			{
-				opt.AddPolicy("CorsPolicy", builder =>
-				{
-					builder.AllowAnyHeader()
-					.AllowAnyMethod() // Gelen herhangi bir metoda izin ver
-					.SetIsOriginAllowed((host) => true) // Gelen herhangi bir kaynaða izin ver
-					.AllowCredentials(); //Herhangi bir kimliðe izin ver
-				});
-			});
-			builder.Services.AddSignalR();
+            builder.Services.AddCors(opt =>
+            {
+                opt.AddPolicy("CorsPolicy", builder =>
+                {
+                    builder.AllowAnyHeader()
+                    .AllowAnyMethod() // Gelen herhangi bir metoda izin ver
+                    .SetIsOriginAllowed((host) => true) // Gelen herhangi bir kaynaða izin ver
+                    .AllowCredentials(); //Herhangi bir kimliðe izin ver
+                });
+            });
+            builder.Services.AddSignalR();
 
 
 
-			builder.Services.AddDbContext<SignalRContext>();
-			//AUTO MAPPER
-			builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            builder.Services.AddDbContext<SignalRContext>();
+            //AUTO MAPPER
+            builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
-			builder.Services.AddScoped<IAboutService,AboutManager>();
-			builder.Services.AddScoped<IAboutDal,EfAboutDal>();
+            builder.Services.AddScoped<IAboutService, AboutManager>();
+            builder.Services.AddScoped<IAboutDal, EfAboutDal>();
 
-			builder.Services.AddScoped<IBookingService, BookingManager>();
-			builder.Services.AddScoped<IBookingDal, EfBookingDal>();
+            builder.Services.AddScoped<IBookingService, BookingManager>();
+            builder.Services.AddScoped<IBookingDal, EfBookingDal>();
 
             builder.Services.AddScoped<ICategoryService, CategoryManager>();
             builder.Services.AddScoped<ICategoryDal, EfCategoryDal>();
@@ -80,29 +81,32 @@ namespace SignalRApi
             builder.Services.AddScoped<IBasketService, BasketManager>();
             builder.Services.AddScoped<IBasketDal, EfBasketDal>();
             builder.Services.AddControllers();
-			// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-			builder.Services.AddEndpointsApiExplorer();
-			builder.Services.AddSwaggerGen();
 
-			var app = builder.Build();
+            builder.Services.AddControllersWithViews()
+    .AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
 
-			// Configure the HTTP request pipeline.
-			if (app.Environment.IsDevelopment())
-			{
-				app.UseSwagger();
-				app.UseSwaggerUI();
-			}
+            var app = builder.Build();
 
-			app.UseCors("CorsPolicy");
+            // Configure the HTTP request pipeline.
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI();
+            }
 
-			app.UseHttpsRedirection();
+            app.UseCors("CorsPolicy");
 
-			app.UseAuthorization();
+            app.UseHttpsRedirection();
+
+            app.UseAuthorization();
 
 
-			app.MapControllers();
-			app.MapHub<SignalRHub>("/signalrhub"); //localhost://1234//signalrhub endpointi oluþturuldu.
-			app.Run();
-		}
-	}
+            app.MapControllers();
+            app.MapHub<SignalRHub>("/signalrhub"); //localhost://1234//signalrhub endpointi oluþturuldu.
+            app.Run();
+        }
+    }
 }
