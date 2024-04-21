@@ -6,9 +6,7 @@
         public decimal Price { get; set; }
         public decimal TotalPrice { get; set; }
         public int Count { get; set; }
-
-        //NAV
-
+        public string ProductName { get; set; }
         public int ProductID { get; set; }
         public int MenuTableID { get; set; }
     }
