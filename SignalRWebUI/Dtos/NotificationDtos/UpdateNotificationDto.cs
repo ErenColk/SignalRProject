@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SignalR.DtoLayer.NotificationDto
+namespace SignalRWebUI.Dtos.NotificationsDtos
 {
-    public class CreateNotificationDto
+    public class UpdateNotificationDto
     {
+        public int NotificationID { get; set; }
         public string Type { get; set; }
         public string Icon { get; set; }
         public string Description { get; set; }

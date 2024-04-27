@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace SignalR.DtoLayer.NotificationDto
 {
-    internal class ResultNotificationDto
+    public class ResultNotificationDto
     {
+        public int NotificationID { get; set; }
+        public string Type { get; set; }
+        public string Icon { get; set; }
+        public string Description { get; set; }
+        public DateTime Date { get; set; }
+        public bool Status { get; set; }
     }
 }
