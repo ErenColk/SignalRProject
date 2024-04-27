@@ -80,6 +80,10 @@ namespace SignalRApi
 
             builder.Services.AddScoped<IBasketService, BasketManager>();
             builder.Services.AddScoped<IBasketDal, EfBasketDal>();
+
+
+            builder.Services.AddScoped<INotificationService, NotificationManager>();
+            builder.Services.AddScoped<INotificationDal,EfNotificationDal>();
             builder.Services.AddControllers();
 
             builder.Services.AddControllersWithViews()
