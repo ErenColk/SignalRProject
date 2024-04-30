@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using SignalR.DtoLayer.BookingDto;
+using SignalRWebUI.Dtos.BookingDtos;
 using System.Net.Http;
 using System.Text;
 

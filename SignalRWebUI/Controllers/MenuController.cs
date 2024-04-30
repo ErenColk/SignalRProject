@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using SignalR.DtoLayer.BasketDto;
+using SignalRWebUI.Dtos.BasketDtos;
 using SignalRWebUI.Dtos.ProductDtos;
 using System.Text;
 
