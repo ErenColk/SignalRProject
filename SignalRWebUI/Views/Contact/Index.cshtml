@@ -2,12 +2,10 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 0;
 }
 
-@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/AdminLayout/Index.cshtml";
-}
+
 
 @model List<ResultContactDto>
 
@@ -39,8 +37,9 @@
                             <tbody>
                                 @foreach (var item in Model)
                                 {
+                                    count++;
                                     <tr>
-                                        <td>@item.ContactID</td>
+                                        <th>@count</th>
                                         <td>@item.Location</td>
                                         <td>@item.Phone</td>
                                         <td>@item.Mail</td>

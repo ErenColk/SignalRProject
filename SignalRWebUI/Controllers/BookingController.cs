@@ -42,6 +42,7 @@ namespace SignalRWebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateBooking(CreateBookingDto createBookingDto)
         {
+            createBookingDto.Description = "Rezervasyon Alındı";
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(createBookingDto);
 
@@ -55,6 +56,7 @@ namespace SignalRWebUI.Controllers
             return View();
         }
 
+ 
 
         public async Task<IActionResult> DeleteBooking(int id)
         {
