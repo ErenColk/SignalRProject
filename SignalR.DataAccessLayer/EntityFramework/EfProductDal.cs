@@ -65,7 +65,7 @@ namespace SignalR.DataAccessLayer.EntityFramework
         public decimal ProductPriceAvg()
         {
             using var context = new SignalRContext();
-            return context.Products.Average(x => x.Price);
+            return Math.Round(context.Products.Average(x => x.Price),2);
 
         }
 
