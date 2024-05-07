@@ -1,4 +1,5 @@
-﻿using MailKit.Net.Smtp;
+﻿
+using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Mvc;
 using MimeKit;
 using SignalRWebUI.Dtos.MailDto;
@@ -26,7 +27,7 @@ namespace SignalRWebUI.Controllers
             mimeMessage.From.Add(mailboxAddressFrom);
 
             MailboxAddress mailboxAddressTo = new MailboxAddress("User", createMailDto.ReceiverMail);
-            mimeMessage.From.Add(mailboxAddressTo);
+            mimeMessage.To.Add(mailboxAddressTo);
 
 
             var bodyBuilder = new BodyBuilder();    
