@@ -24,7 +24,6 @@ namespace SignalRWebUI.ViewComponents.DefaultComponents
             var values = JsonConvert.DeserializeObject<List<ResultTestimonialDto>>(jsonData); // Burada okunan değeri Json Formatından deserilaze ederek normal metne döndürür.
             return View(values);
 
-
         }
     }
 }

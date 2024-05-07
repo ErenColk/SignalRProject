@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using SignalR.DataAccessLayer.Concrete;
 using SignalR.EntityLayer.Entities;
 
@@ -8,12 +11,15 @@ namespace SignalRWebUI
 		public static void Main(string[] args)
 		{
 			var builder = WebApplication.CreateBuilder(args);
+			var requireAuthorizePolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
 
 			// Add services to the container.
-			builder.Services.AddControllersWithViews();
-			builder.Services.AddDbContext<SignalRContext>();
+			builder.Services.AddControllersWithViews(opt => opt.Filters.Add(new AuthorizeFilter(requireAuthorizePolicy))); // Bütün controllerlarýna authentication iþlemini koyar
+            builder.Services.AddDbContext<SignalRContext>();
 			builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<SignalRContext>();
 			builder.Services.AddHttpClient();
+
+			builder.Services.ConfigureApplicationCookie(opts => opts.LoginPath = "/Login/Index/");
 
 			var app = builder.Build();
 
@@ -29,7 +35,7 @@ namespace SignalRWebUI
 			app.UseStaticFiles();
 
 			app.UseRouting();
-
+			app.UseAuthentication();
 			app.UseAuthorization();
 
 			app.MapControllerRoute(

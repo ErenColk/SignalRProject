@@ -19,13 +19,13 @@ namespace SignalRWebUI.ViewComponents.DefaultComponents
         {
 
             var client = _httpClientFactory.CreateClient(); // Bir istemci yarat 
-            var responseMessage = await client.GetAsync("https://localhost:7194/api/Discount"); //Tetiklenecek yer 
+            var responseMessage = await client.GetAsync("https://localhost:7194/api/Discount/GetListByStatusTrue/"); //Tetiklenecek yer 
             var jsonData = await responseMessage.Content.ReadAsStringAsync(); // Jsondan gelen içeriği string formatında oku 
             var values = JsonConvert.DeserializeObject<List<ResultDiscountDto>>(jsonData); // Burada okunan değeri Json Formatından deserilaze ederek normal metne döndürür.
             return View(values);
 
 
         }
-
+      
     }
 }
