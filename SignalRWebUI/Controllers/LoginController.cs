@@ -33,5 +33,13 @@ namespace SignalRWebUI.Controllers
 
 			return View();
 		}
-	}
+
+        public async Task<IActionResult> LogOut(LoginDto loginDto)
+        {
+			await _signInManager.SignOutAsync();
+
+			return RedirectToAction("Index", "Login");
+
+        }
+    }
 }
