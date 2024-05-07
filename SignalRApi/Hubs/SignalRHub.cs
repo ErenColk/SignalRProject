@@ -77,8 +77,6 @@ namespace SignalRApi.Hubs
             var value14 = _moneyCaseService.TTotalMoneyCaseAmount();
             await Clients.All.SendAsync("ReceiveTotalMoneyCaseAmount", value14.ToString("0.00") + "₺");
 
-
-
             var value15 = _moneyCaseService.TTotalMoneyCaseAmount();
             await Clients.All.SendAsync("ReceiveTotalMoneyCaseAmount", value15.ToString("0.00") + "₺");
 
@@ -117,11 +115,11 @@ namespace SignalRApi.Hubs
             var value9 = _productService.TProductPriceBySteakBurger();
             await Clients.All.SendAsync("ProductPriceBySteakBurger", value9);
 
-            var value10 = 42;
-            await Clients.All.SendAsync("ReceiveStaticValue1", value10);
+            var value10 = _productService.TTotalPriceByDrinkCategory();
+            await Clients.All.SendAsync("ReceiveTotalPriceByDrinkCategory", value10);
 
-            var value11 = 38;
-            await Clients.All.SendAsync("ReceiveStaticValue2", value11);
+            var value11 = _productService.TTotalPriceBySaladCategory();
+            await Clients.All.SendAsync("ReceiveTotalPriceBySaladCategory", value11);
         }
         public async Task GetBookingList()
         {

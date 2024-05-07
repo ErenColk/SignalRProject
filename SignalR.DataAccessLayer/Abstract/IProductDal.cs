@@ -21,6 +21,8 @@ namespace SignalR.DataAccessLayer.Abstract
 
 		decimal ProductAvgPriceByHamburger();
 		decimal ProductPriceBySteakBurger();
+		decimal TotalPriceByDrinkCategory();
+		decimal TotalPriceBySaladCategory();
 
 	}
 }
